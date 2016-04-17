@@ -184,7 +184,7 @@ $ touch app/views/todos/index.html.erb
 In `app/views/todos/index.html.erb` we'll simply put the word `hello world`. Finally we can see our page rendered.
 
 ## EDD re revisited: You do - Tunr
-- Get "hello world" to show up in the `tunr` application.
+- Get "hello world" to show up in the `index` view for the `tunr` application.
 
 ## The Index Feature: I do - Reminder.ly
 
@@ -247,7 +247,7 @@ Take note of the prefix column. We're going to leverage the prefix to create pat
 
 ### `link_to` method
 
-There's a great helper method rails gives us to link to things in our rails views, `link_to`. The `link_to` method takes two or more arguments. The first argument is what text you want the link to show up as. The second argument is where it will go. You can also checkout other options you can pass in [here](http://api.rubyonrails.org/classes/ActionView/Helpers/UrlHelper.html#method-i-link_to). Check out the way we wrote this in Sinatra:
+There's a great helper method rails gives us, to link to things in our rails views, `link_to`. The `link_to` method takes two or more arguments. The first argument is what text you want the link to show up as. The second argument is where it will go. You can also checkout other options you can pass in [here](http://api.rubyonrails.org/classes/ActionView/Helpers/UrlHelper.html#method-i-link_to). Check out the way we wrote this in Sinatra:
 
 ```html
 <ul>
@@ -287,6 +287,8 @@ def show
 end
 ```
 
+Just like in Sinatra, rails passes data from requests through `params`.
+
 Refresh and ... the same template error! Let fix that by creating the view for this action.
 
 ```bash
@@ -301,4 +303,12 @@ Let's update the show view to link back to the index and show both the body and 
 <p><%= @todo.author %></p>
 ```
 
-You'll notice here, we're using the `todos` prefix for the index route in the `link_to`
+You'll notice here, we're using the `todos` prefix for the index route in the `link_to`. It's very important we're very exact when we write the path in a `link_to` helper. One 's' can change the route completely.
+
+Awesome! We now have a fully fledged index and show feature for our application.
+
+## The Show Feature: You do - Tunr
+
+- Create a show feature for each artist.
+- Make sure the show feature links to the index of artists.
+- Change existing routes to leverage `resources`.
