@@ -237,6 +237,8 @@ We're going to have to write this at least 5 more times for this model looks lik
 resources :todos, only: [:index, :show]
 ```
 
+Because rails developers were consistently writing out routes for the 7 RESTful routes, they decided to make a short cut for it, `resources`. The argument for `resources` should always be snake case and plural.
+
 We can inspect all of the routes in the terminal by running the command `$ rake routes`
 
 ![Rake Routes](images/rake_routes.png)
