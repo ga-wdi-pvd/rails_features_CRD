@@ -176,6 +176,16 @@ Awesome, we can now delete any todos we want!
 
 - Add the ability to delete artists
 
+Deleting artist will actually cause an error because you have songs that are associated to artist. We need to include a bit of code the in the Artist Model.
+
+```ruby
+class Artist < ActiveRecord::Base
+  has_many :songs, dependent: :destroy
+end
+```
+
+This bit of code will destroy all songs belonging to a particular artist when that artist is destroyed.
+
 ### Moar - Tunr
 
 - With any remaining time, try to incorporate the same features for the `song` model.
