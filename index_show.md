@@ -127,4 +127,6 @@ Awesome! We now have a fully fledged index and show feature for our application.
 - Make sure the show feature links to the index of artists.
 - Change existing routes to leverage `resources`.
 
+[Solution Here](https://github.com/andrewsunglaekim/tunr_features/tree/index-show-solution)
+
 On to [New Create and Destroy](new_create_destroy.md)
