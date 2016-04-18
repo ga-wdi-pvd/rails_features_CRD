@@ -1,4 +1,4 @@
-# Rails Index/Show Features
+# Rails Features
 
 ## Learning Objectives
 - Create a new rails application with postgres as the default.

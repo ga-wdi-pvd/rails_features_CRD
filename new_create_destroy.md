@@ -2,8 +2,6 @@
 
 Check out the [precursor to this lesson](index_show.md)
 
-## Learning Objectives
-
 ## Framing
 One of the most common things that is done on the web is to create new rows in a database. Only users aren't thinking they're creating new rows in a database. They're creating a new status on facebook, creating a new tweet on the latest news, creating a new sale on craigslist.
 
