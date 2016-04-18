@@ -1,6 +1,6 @@
 # Rails Create & Destroy features
 
-Check out the [precursor to this lesson](https://github.com/ga-wdi-lessons/rails_index_show)
+Check out the [precursor to this lesson](index_show.md)
 
 ## Learning Objectives
 

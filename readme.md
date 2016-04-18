@@ -1,12 +1,21 @@
 # Rails Index/Show Features
 
 ## Learning Objectives
+- Create a new rails application with postgres as the default.
+- Use rake to create, edit, and update, and seed the db.
+- Use Rails generators to create models.
+- Use Rails console to inspect and manipulate models.
+- Describe the full life cycle of a request/response in rails
+- Implement the index feature for a model in rails
+- Implement the show feature for a model in rails
+- Implement the create feature for a model in rails
+- Implement the delete feature for a model in rails
 
 ## Framing && Revisit MVC pattern
 
 ![rMVC](http://i.stack.imgur.com/Sf2OQ.png)
 
-Over the next few lessons we'll be learning about the "Rails way" to do things. We're going to implement features that you are familiar with from Sinatra(index, create etc..) in Rails. We'll be going through a significant amount of conventions throughout the lesson and they're all really important! There's also an [appendix]() for this at the bottom.
+Over the next few lessons we'll be learning about the "Rails way" to do things. We're going to implement features that you are familiar with from Sinatra(index, create etc..) in Rails. We'll be going through a significant amount of conventions throughout the lesson and they're all really important! There's also an [appendix](conventions.md) for this in the repo.
 
 The general format for today will be similar to the sinatra lesson. I do- An app called Reminder.ly, you do- TUNR. At this point, you might be asking your self why are we doing this.. again??
 
@@ -186,4 +195,4 @@ In `app/views/todos/index.html.erb` we'll simply put the word `hello world`. Fin
 ## EDD re revisited: You do - Tunr
 - Get "hello world" to show up in the `index` view for the `tunr` application.
 
-Onto [Index and Show](index_show.md)
+On to [Index and Show](index_show.md)
