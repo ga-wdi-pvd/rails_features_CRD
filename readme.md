@@ -105,6 +105,13 @@ end
 
 ```
 
+In order to actually run the migrations you'll need to first create the database then run the migrations. In the terminal:
+
+```bash
+$ rake db:create
+$ rake db:migrate
+```
+
 ### Rails Console.
 If you ever need a sand box in your web app's developement environment:
 
@@ -113,10 +120,6 @@ rails c
 ```
 
 This will allow you to enter a REPL with all your model definitions and connections to the database. Very powerful tool for testing out different things you're curious about for your application.
-
-### `seeds.rb`
-
-
 
 ## SETUP: You do - Tunr - Model & Migration
 
