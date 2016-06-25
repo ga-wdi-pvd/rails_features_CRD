@@ -2,7 +2,7 @@
 
 ## The Index Feature: I do - Reminder.ly
 
-hello world is nice, but really we want to see all of our todos. The first thing we need to do is query for todos in our controller. In `app/controllers/todos_controller.rb`:
+`"Hello World"` is nice, but really we want to see all of our `todos`. The first thing we need to do is query for `todos` in our controller. In `app/controllers/todos_controller.rb`:
 
 ```ruby
 class TodosController < ApplicationController
@@ -18,7 +18,7 @@ When our router(`config/routes.rb`) is configured this way:
 get 'todos' => 'todos#index'
 ```
 
-It recognizes requests at `todos` and points those requests to execute the index method(action) in the `TodosController`. Once there, it will query for all the `todo`'s in our database. If nothing is explicitly rendered, it will implicitly render a corresponding index view. That view will be located in a folder with the same name as the controller.
+It recognizes requests at `todos` and points those requests to execute the index method(action) in the `TodosController`. Once there, it will query for all the `todo`'s in our database. If nothing is explicitly rendered, it will **implicitly render** a corresponding `index` view. That view will be located in a folder with the **same name** as the controller.
 
 Now all that's left is to update the view. In `app/views/todos/index.html.erb`:
 
@@ -45,13 +45,13 @@ get 'todos' => 'todos#index'
 get 'todos/:id' => 'todos#show'
 ```
 
-We're going to have to write this at least 5 more times for this model looks like. That seems not dry. Turns out, rails has a short hand way of writing this:
+We're going to have to write this at least 5 more times for this model looks like. That seems not dry. Turns out, Rails has a short hand way of writing this:
 
 ```ruby
 resources :todos, only: [:index, :show]
 ```
 
-Because rails developers were consistently writing out routes for the 7 RESTful routes, they decided to make a short cut for it, `resources`. The argument for `resources` should always be snake case and plural.
+Because Rails developers were consistently writing out routes for the 7 RESTful routes, they decided to make a short cut for it, `resources`. The argument for `resources` should always be snake case and plural.
 
 We can inspect all of the routes in the terminal by running the command `$ rake routes`
 
@@ -61,7 +61,7 @@ Take note of the prefix column. We're going to leverage the prefix to create pat
 
 ### `link_to` method
 
-There's a great helper method rails gives us, to link to things in our rails views, `link_to`. The `link_to` method takes two or more arguments. The first argument is what text you want the link to show up as. The second argument is where it will go. You can also checkout other options you can pass in [here](http://api.rubyonrails.org/classes/ActionView/Helpers/UrlHelper.html#method-i-link_to). Check out the way we wrote this in Sinatra:
+There's a great helper method Rails gives us, to link to things in our Rails views, `link_to`. The `link_to` method takes two or more arguments. The first argument is what text you want the link to show up as. The second argument is where it will go. You can also checkout other options you can pass in [here](http://api.rubyonrails.org/classes/ActionView/Helpers/UrlHelper.html#method-i-link_to). Check out the way we wrote this in Sinatra:
 
 ```html
 <ul>
@@ -73,7 +73,7 @@ There's a great helper method rails gives us, to link to things in our rails vie
 </ul>
 ```
 
-We can write this in rails like this:
+We can write this in Rails like this:
 
 ```html
 <ul>
@@ -87,7 +87,7 @@ We can write this in rails like this:
 
 In the latter snippet we're using the `todo` prefix with `_path` to link to the show route.
 
-These two snippets are functionally equivalent. The latter is the rails way. In fact, Rails is so smart that if we pass in the model itself to `link_to`, it'll work as well:
+These two snippets are functionally equivalent. The latter is the Rails way. In fact, Rails is so smart that if we pass in the model itself to `link_to`, it'll work as well:
 
 ```html
 <%= link_to todo.body, todo %>
@@ -101,7 +101,7 @@ def show
 end
 ```
 
-Just like in Sinatra, rails passes data from requests through `params`.
+Just like in Sinatra, Rails passes data from requests through `params`.
 
 Refresh and ... the same template error! Let fix that by creating the view for this action.
 
@@ -109,7 +109,7 @@ Refresh and ... the same template error! Let fix that by creating the view for t
 $ touch app/views/todos/show.html.erb
 ```
 
-Let's update the show view to link back to the index and show both the body and author of the reminder. In `app/views/todos/show.html.erb`:
+Let's update the show view to link back to the index and show both the body and author of the `todo`. In `app/views/todos/show.html.erb`:
 
 ```html
 <h2><%= link_to "Todos", todos_path %></h2>
