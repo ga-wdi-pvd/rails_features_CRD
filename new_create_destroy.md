@@ -3,13 +3,13 @@
 Check out the [precursor to this lesson](index_show.md)
 
 ## Framing
-One of the most common things that is done on the web is to create new rows in a database. Only users aren't thinking they're creating new rows in a database. They're creating a new status on facebook, creating a new tweet on the latest news, creating a new sale on craigslist.
+One of the most common things that is done on the web is to create new rows in a database. Only users aren't thinking they're creating new rows in a database. They're creating a new status on Facebook, creating a new tweet on the latest news, creating a new sale on craigslist.
 
-In the current version of our Reminder.ly app, we have a solid `index` and `show` feature that allows us to view all our reminders as well as each individual reminder. Now we want to be able to create new reminders!
+In the current version of our Reminder.ly app, we have a solid `index` and `show` feature that allows us to view all our `todos`  as well as each individual `todo`. Now we want to be able to create new `todos`!
 
 ### The `new` route: I do - Reminder.ly
 
-In order to give the user ability to create a reminder, we first need to provide that user with an interface(aka. a form). For now, we'll put this form on a separate page. Let's update the resources so that the router can make sense of requests to `new` route.
+In order to give the user ability to create a `todo`, we first need to provide that user with an interface(aka. a form). For now, we'll put this form on a separate page. Let's update the resources so that the router can make sense of requests to `new` route.
 
 ```ruby
 resources :todos, only: [:index, :show, :new]
