@@ -17,7 +17,7 @@
 
 Over the next few lessons we'll be learning about the "Rails way" to do things. We'll be going through a significant amount of conventions throughout the lesson and they're all really important! There's also an [appendix](conventions.md) for this in the repo.
 
-The general format for today will be a code mirror code along, where the instructor (**I-DO**) will build an app called `Reminder.ly`, while the students(**You-Do**) will build `TUNR`. If you are alr
+The general format for today will be a code mirror code along, where the instructor (**I-DO**) will build an app called `Reminder.ly`, while the students(**You-Do**) will build `Tunr`.  Why `Tunr`? Because...
 
 - You are already familiar with this domain model
 - Many web apps or features of web apps are based around this simple domain model.
