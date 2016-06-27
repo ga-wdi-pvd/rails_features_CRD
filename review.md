@@ -82,3 +82,143 @@ end
 <% end %>
 </ul>
 ```
+
+This should display each artist at <http://localhost:3000/artists>
+
+## Show
+
+
+```
+<ul>
+<% @artists.each do |artist| %>
+  <li><%= link_to artist.name, artist_path(artist)%></li>
+<% end %>
+</ul>
+```
+
+- `link_to` generates an anchor tag
+- `artist_path` is a method created from `resources :artists` in config/routes
+
+### Define the show action
+
+```rb
+class ArtistsController < ApplicationController
+  def index
+    @artists = Artist.all
+  end
+  def show
+    @artist = Artist.find(params[:id])
+  end
+end
+```
+
+### Create the template
+
+```
+<!-- app/views/artists/show.html.erb -->
+
+<%= artist.name %>
+```
+
+## Create
+
+### Define the action
+
+```rb
+class ArtistsController < ApplicationController
+  def index
+    @artists = Artist.all
+  end
+  def show
+    @artist = Artist.find(params[:id])
+  end
+  def new
+    @artist = Artist.new
+  end
+end
+```
+
+### Create a form
+
+```
+<!-- app/views/new.html.erb -->
+
+<%= form_for @artist do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.label :photo_url %>
+  <%= f.text_field :photo_url %>
+  <%= f.label :nationality %>
+  <%= f.text_field :nationality %>
+  <%= f.submit %>
+<% end %>
+```
+
+### Define the action
+
+```rb
+class ArtistsController < ApplicationController
+  def index
+    @artists = Artist.all
+  end
+  def show
+    @artist = Artist.find(params[:id])
+  end
+  def new
+    @artist = Artist.new
+  end
+  def create
+    @artist = Artist.create artist_params
+    redirect_to artist_path @artist
+  end
+
+  private
+  def artist_params
+    params.require(:artist).permit(:name, :photo_url, :nationality)
+  end
+end
+```
+
+Using `strong_params` prevents a vulnerability called [mass assignment](http://brakemanscanner.org/docs/warning_types/mass_assignment/)
+
+## Delete
+
+### Update the show view
+
+```
+<!-- app/views/artists/show.html.erb -->
+
+<%= artist.name %>
+
+<%= link_to artist_path(@artist), method: :delete %>
+```
+
+### Define the action
+
+```rb
+class ArtistsController < ApplicationController
+  def index
+    @artists = Artist.all
+  end
+  def show
+    @artist = Artist.find(params[:id])
+  end
+  def new
+    @artist = Artist.new
+  end
+  def create
+    @artist = Artist.create artist_params
+    redirect_to artist_path @artist
+  end
+  def destroy
+    @artist = Artist.find(params[:id])
+    @artist.destroy
+    redirect_to artists_path
+  end
+
+  private
+  def artist_params
+    params.require(:artist).permit(:name, :photo_url, :nationality)
+  end
+end
+```
