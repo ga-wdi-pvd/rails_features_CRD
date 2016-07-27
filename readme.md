@@ -188,7 +188,7 @@ Lets dissect this error message. Here's the relevant part:
 
 > `TodosController#index is missing a template for this request format and variant request.formats: ["text/html"] request.variant: []`
 
-We have no view corresponding to an index view for Todos. Within `app/views`, we need to create a folder called `todos`, and a file called `index` in that folder.
+We have no view corresponding to an index view for Todos. Within `app/views`, we need to create a folder called `todos`, and a file called `index.html.erb` in that folder.
 
  Let's do that now:
 
