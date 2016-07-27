@@ -184,12 +184,11 @@ Yet another error ...
 
 ![Template Missing](images/template_missing.png)
 
-Lets dissect this error message.
+Lets dissect this error message. Here's the relevant part:
 
-- `Missing template todos/index`
-- `Searched in: * "/Users/andrewkim/wdi/temp/reminderly/app/views"`
+> `TodosController#index is missing a template for this request format and variant request.formats: ["text/html"] request.variant: []`
 
-We need to create a folder called `todos`, and a file called `index` in that folder.
+We have no view corresponding to an index view for Todos. Within `app/views`, we need to create a folder called `todos`, and a file called `index` in that folder.
 
  Let's do that now:
 
