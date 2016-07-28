@@ -1,9 +1,9 @@
 # Rails Features
 
-## Learning Objectives
+## Learning Objectives (2:30 - 2:35, 5 min)
 - Create a new Rails application with postgres as the default.
 - Use rake to create, edit, and update, and seed the db.
-- Use Rails generators to create models.
+- Use Rails generators to create and add attributes to models.
 - Use Rails console to inspect and manipulate models.
 - Describe the full life cycle of a request/response in Rails
 - Implement the index feature for a model in Rails
@@ -11,7 +11,7 @@
 - Implement the create feature for a model in Rails
 - Implement the delete feature for a model in Rails
 
-## Framing && Revisit MVC pattern
+## Framing && Revisit MVC pattern (2:35 - 2:45, 10 min)
 
 ![rMVC](http://i.stack.imgur.com/Sf2OQ.png)
 
@@ -22,35 +22,39 @@ The general format for today will be a code mirror code along, where the instruc
 - You are already familiar with this domain model
 - Many web apps or features of web apps are based around this simple domain model.
 
-> this will be the first todo app we'll be seeing, but it's the quintessential app for learning a new framework because its the perfect contrived example of a single model CRUD application.
+> this will be the first todo app we'll be seeing, but it's the quintessential app for learning a new framework because its the perfect contrived example of a **single model CRUD application**.
 
 
 **Note**: If at any point in your code, you have the words `todos` or `reminderly` in your application, you're probably doing something incorrectly.
 
-## SETUP: I do - Reminder.ly
+## SETUP: I do - Reminder.ly (2:45 - 2:50 min, 5 min)
 
-The first thing that we should do is determine our domain model.
+The first thing that we should do is determine our domain model -- items on a to-do list.
 
 ### ERD
-|TODOS|
-|---|---|
-|body|text|
+
+```
+|   TODOS   |
+|------|----|
+| body |text|
 |author|text|
+```
 
 Starting a new Rails app:
 
 ```bash
 $ rails new reminderly -d postgresql
 $ cd reminderly
+$ rails server
 ```
 
 > This command will create a new Rails app. The `-d postgresql` tells Rails to create a new app using postgresql instead of sqlite3 by default.
 
 In order to talk about `todos`, we need to define them in the context of our Rails app. We do this like we did with Active Record, by creating **model** files. We can create these files using generators.
 
-### Generators - An Aside
+### Generators: Models & Migrations (2:50 - 3:10, 20 min)
 
-In Rails, there are terminal commands that generate massive amounts of code for you. If you find yourself using these commands, you should know what each file being created does. Then use them at your leisure. That said we're going to learn some basic ones today.
+In Rails, there are terminal commands (rails generators) that generate massive amounts of code for you. If you find yourself using these commands, you should know what each file being created does, then use them at your discretion. That said, we're going to learn some basic ones today.
 
 ### Models
 
@@ -60,16 +64,20 @@ Run this terminal command in your Rails directory to create models:
 
 > We're telling the terminal to run a Rails command that generates a model called todo. Notice the convention for model name being singular and snake case.
 
+> If this command 'hangs' and your terminal is unresponsive, open a new tab and type `spring stop` and retry the above command
+
 You can see that it created some files. Don't worry about those testing files for now, they won't influence our app today. The two files that are important:
 
-in `app/models/todo.rb`:
+1) a model located here: `app/models/todo.rb`:
 
 ```ruby
-class Todo < ActiveRecord::Base
+class Todo < ApplicationRecord
 end
 ```
 
-in a our migration file: `db/migrate/<sometimestamp>_create_todos.rb`:
+> Note: ApplicationRecord inherits from ActiveRecord::Base, and is a a place where we can write helper methods for ActiveRecord. It is new in Rails 5.
+
+2) a migration located here: `db/migrate/<sometimestamp>_create_todos.rb`:
 
 ```ruby
 class CreateTodos < ActiveRecord::Migration
@@ -88,7 +96,7 @@ Migrations are a convenient way to alter your database schema over time in a con
 
 You can think of each migration as being a new 'version' of the database. A schema starts off with nothing in it, and each migration modifies it to add or remove tables, columns, or entries. Active Record knows how to update your schema along this timeline, bringing it from whatever point it is in the history to the latest version. Active Record will also update your `db/schema.rb` file to match the up-to-date structure of your database.
 
-No more writing `schema.sql` files! or running `psql` commands to load databases!
+> ### No more writing `schema.sql` files! or running `psql` commands to load databases!
 
 ### Update Migration
 We need to update the migration to reflect our domain model. In `db/migrate/<timestamp>_create_todos.rb`:
@@ -113,7 +121,32 @@ $ rake db:create
 $ rake db:migrate
 ```
 
-### Rails Console.
+### Adding columns/properties with migrations
+
+After the initial migration, sometimes we want to make changes to our models. We can create additional migrations using `rails generate migration`. If we don't pass any other arguments to this set of commands, we get some output explaining the use of the command.
+
+Let's say that with this next migration, we want to add a column to our Todos table (*add a property to our Todo model*) that reflects whether or the Todo (task) has been completed. To accomplish this, let's run the following in the command line:
+
+```bash
+rails generate migration add_completed_to_todos completed:boolean
+rake db:migrate
+```
+
+### Seeding Todos
+
+After creating the database and running the initial migration to generate the schema, we can then seed our database. First, I'll add the following code to `db/seeds.rb`:
+
+```rb
+Todo.destroy_all
+Todo.create([
+  {body: "finish WDI", author: "author1", completed: false},
+  {body: "Get a job", author: "author2", completed: false},
+  {body: "learn rails", author: "author3", completed: true},
+  {body: "learn jQuery", author: "author4", completed: true}
+])
+```
+
+### Rails Console (3:10 - 3:15, 5 min)
 If you ever need a sand box in your web app's development environment:
 
 ```bash
@@ -122,13 +155,15 @@ Rails c
 
 This will allow you to enter a REPL with all your model definitions and connections to the database. Very powerful tool for testing out different things you're curious about for your application.
 
-## SETUP: You do - Tunr - Model & Migration
+## SETUP: You do - Tunr - Model & Migration (3:15 - 3:30, 15 min)
 
-- Create models and migrations for `Tunr`. (Don't forget your associations in your model definitions!)
+- Create models and migrations for `Tunr`. (Don't forget [your associations in your model definitions](https://github.com/ga-wdi-exercises/tunr_rails/blob/solution/db/migrate/20150724165157_create_songs.rb)! Hint: follow this link and take a look at line 7)
 
 **Note**: You did this correctly if you can create an `artist` and a `song` in the Rails console.
 
-## SETUP: You do - Tunr - Seed
+## Break (3:30-3:40, 10 min)
+
+## SETUP: You do - Tunr - Seed (3:40 - 3:45, 5 min)
 
 Visit [tunr_repo](https://github.com/ga-wdi-exercises/tunr_rails/tree/solution/db)
 
@@ -138,9 +173,9 @@ At this site you'll see 3 files: `artist_data.rb`, `song_data.rb` and `seeds.rb`
 $ rake db:seed
 ```
 
-**Note**: You know you this did this right if you run the Rails console and enter `Artist.all.length` and get back `5`
+> **Note**: You know you this did this right if you run the Rails console and enter `Artist.all.length` and get back `5`
 
-## EDD revisted: I do - Reminder.ly
+## Error Driven Development (EDD) revisted: I do - Reminder.ly (3:45 - 3:55, 10 min)
 
 The index feature is generally one that wants to display a collection of items. Before we define the feature, we need to first code a path to listen for. In `config/routes.rb`:
 
@@ -188,7 +223,7 @@ Lets dissect this error message. Here's the relevant part:
 
 > `TodosController#index is missing a template for this request format and variant request.formats: ["text/html"] request.variant: []`
 
-We have no view corresponding to an index view for Todos. Within `app/views`, we need to create a folder called `todos`, and a file called `index.html.erb` in that folder.
+We have no view corresponding to an index for Todos. Within `app/views`, we need to create a folder called `todos`, and a file called `index.html.erb` in that folder.
 
  Let's do that now:
 
@@ -199,7 +234,7 @@ $ touch app/views/todos/index.html.erb
 
 In `app/views/todos/index.html.erb` we'll simply put the word `hello world`. Finally we can see our page rendered.
 
-## EDD re-revisited: You do - Tunr
+## EDD re-revisited: You do - Tunr (3:55 - 4:05, 10 min)
 
 - Get "Hello World" to show up in the `index` view for the `Tunr` application.
 
