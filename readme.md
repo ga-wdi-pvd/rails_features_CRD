@@ -54,7 +54,7 @@ In order to talk about `todos`, we need to define them in the context of our Rai
 
 ### Generators: Models & Migrations (2:50 - 3:10, 20 min)
 
-In Rails, there are terminal commands that generate massive amounts of code for you. If you find yourself using these commands, you should know what each file being created does. Then use them at your leisure. That said we're going to learn some basic ones today.
+In Rails, there are terminal commands (rails generators) that generate massive amounts of code for you. If you find yourself using these commands, you should know what each file being created does, then use them at your discretion. That said, we're going to learn some basic ones today.
 
 ### Models
 
@@ -64,14 +64,18 @@ Run this terminal command in your Rails directory to create models:
 
 > We're telling the terminal to run a Rails command that generates a model called todo. Notice the convention for model name being singular and snake case.
 
+> If this command 'hangs' and your terminal is unresponsive, open a new tab and type `spring stop` and retry the above command
+
 You can see that it created some files. Don't worry about those testing files for now, they won't influence our app today. The two files that are important:
 
 1) a model located here: `app/models/todo.rb`:
 
 ```ruby
-class Todo < ActiveRecord::Base
+class Todo < ApplicationRecord
 end
 ```
+
+> Note: ApplicationRecord inherits from ActiveRecord::Base, and is a a place where we can write helper methods for ActiveRecord. It is new in Rails 5.
 
 2) a migration located here: `db/migrate/<sometimestamp>_create_todos.rb`:
 
@@ -153,7 +157,7 @@ This will allow you to enter a REPL with all your model definitions and connecti
 
 ## SETUP: You do - Tunr - Model & Migration (3:15 - 3:30, 15 min)
 
-- Create models and migrations for `Tunr`. (Don't forget your associations in your model definitions!)
+- Create models and migrations for `Tunr`. (Don't forget [your associations in your model definitions](https://github.com/ga-wdi-exercises/tunr_rails/blob/solution/db/migrate/20150724165157_create_songs.rb)! Hint: follow this link and take a look at line 7)
 
 **Note**: You did this correctly if you can create an `artist` and a `song` in the Rails console.
 
@@ -171,7 +175,7 @@ $ rake db:seed
 
 > **Note**: You know you this did this right if you run the Rails console and enter `Artist.all.length` and get back `5`
 
-## Error Driven Development (EDD) revisted: I do - Reminder.ly (3:45 - 4:00, 15 min)
+## Error Driven Development (EDD) revisted: I do - Reminder.ly (3:45 - 3:55, 10 min)
 
 The index feature is generally one that wants to display a collection of items. Before we define the feature, we need to first code a path to listen for. In `config/routes.rb`:
 
@@ -230,7 +234,7 @@ $ touch app/views/todos/index.html.erb
 
 In `app/views/todos/index.html.erb` we'll simply put the word `hello world`. Finally we can see our page rendered.
 
-## EDD re-revisited: You do - Tunr (4:00 - 4:15, 15 min)
+## EDD re-revisited: You do - Tunr (3:55 - 4:05, 10 min)
 
 - Get "Hello World" to show up in the `index` view for the `Tunr` application.
 
