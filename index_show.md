@@ -136,7 +136,7 @@ Awesome! We now have a fully fledged index and show feature for our application.
 - Is there a "Rails way" to enter the REPL?
 - Explain the MVC pattern.
 
-## Homework - [Scribble](https://github.com/ga-wdi-pvd/scribble)
+## Homework: [Scribble](https://github.com/ga-wdi-pvd/scribble)
 This will be a multi-night homework.
 For tonight, do the following sections:
 - Models + Migrations
