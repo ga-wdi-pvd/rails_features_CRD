@@ -2,6 +2,17 @@
 
 Check out the [precursor to this lesson](index_show.md)
 
+## Learning Objectives
+<!-- - Create a new Rails application with Postgres as the default. -->
+<!-- - Use rake to create, edit, and update, and seed the db. -->
+<!-- - Use Rails generators to create and add attributes to models. -->
+- Use Rails console to inspect and manipulate models.
+- Describe the full life cycle of a request/response in Rails
+<!-- - Implement the index feature for a model in Rails -->
+<!-- - Implement the show feature for a model in Rails -->
+- Implement the create feature for a model in Rails
+- Implement the delete feature for a model in Rails
+
 ## Framing
 One of the most common things that is done on the web is to create new rows in a database. Only users aren't thinking they're creating new rows in a database. They're creating a new status on Facebook, creating a new tweet on the latest news, creating a new sale on craigslist.
 
