@@ -72,7 +72,7 @@ If we run `rake routes` one more time we'll notice nothing changed.
 
 If we refresh the page we get a new error...
 
-![unknown action](images/unkown_action1.png)
+![unknown action](images/unknown_action1.png)
 
 <details>
   <summary><strong>Q: What can we do to fix this?</strong></summary>
