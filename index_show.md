@@ -1,6 +1,6 @@
 # Rails Index/Show Features
 
-## The Index Feature: I do - Reminder.ly
+## The Index Feature: I Do - Reminder.ly
 
 `"Hello World"` is nice, but really we want to see all of our `todos`. The first thing we need to do is query for `todos` in our controller. In `app/controllers/todos_controller.rb`:
 
@@ -18,7 +18,7 @@ When our router(`config/routes.rb`) is configured this way:
 get 'todos' => 'todos#index'
 ```
 
-It recognizes requests at `todos` and points those requests to execute the index method(action) in the `TodosController`. Once there, it will query for all the `todo`'s in our database. If nothing is explicitly rendered, it will **implicitly render** a corresponding `index` view. That view will be located in a folder with the **same name** as the controller.
+It recognizes requests at `todos` and points those requests to execute the index method (action) in the `TodosController`. Once there, it will query for all the `todo`'s in our database. If nothing is explicitly rendered, it will **implicitly render** a corresponding `index` view. That view will be located in a folder with the **same name** as the controller.
 
 Now all that's left is to update the view. In `app/views/todos/index.html.erb`:
 
@@ -32,11 +32,11 @@ Now all that's left is to update the view. In `app/views/todos/index.html.erb`:
 </ul>
 ```
 
-## The Index Feature: You do - Tunr
+## The Index Feature: You Do - Tunr
 
 Create the index route for artists.
 
-## The Show Feature: I do - Reminder.ly
+## The Show Feature: I Do - Reminder.ly
 
 Similarly to the `index` feature, we need to set up our routes so that the app can listen for the `show` feature. In `config/routes.rb`:
 
@@ -45,7 +45,7 @@ get 'todos' => 'todos#index'
 get 'todos/:id' => 'todos#show'
 ```
 
-We're going to have to write this at least 5 more times for this model looks like. That seems not dry. Turns out, Rails has a short hand way of writing this:
+We're going to have to write this at least 5 more times for this model to have access to all the RESTful routes. That doesn't seem very dry. Turns out, Rails has a short hand way of writing this:
 
 ```ruby
 resources :todos, only: [:index, :show]
@@ -57,11 +57,11 @@ We can inspect all of the routes in the terminal by running the command `$ rake 
 
 ![Rake Routes](images/rake_routes.png)
 
-Take note of the prefix column. We're going to leverage the prefix to create paths that we can link to using the ...
+Take note of the prefix column. We're going to leverage the prefix to create paths that we can link to using the...
 
 ### `link_to` method
 
-There's a great helper method Rails gives us, to link to things in our Rails views, `link_to`. The `link_to` method takes two or more arguments. The first argument is what text you want the link to show up as. The second argument is where it will go. You can also checkout other options you can pass in [here](http://api.rubyonrails.org/classes/ActionView/Helpers/UrlHelper.html#method-i-link_to). Check out the way we wrote this in Sinatra:
+There's a great helper method Rails gives us, to link to things in our Rails views, `link_to`. The `link_to` method takes two or more arguments. The first argument is what text you want the link to show up as. The second argument is where the link will take you. You can also checkout other options you can pass in [here](http://api.rubyonrails.org/classes/ActionView/Helpers/UrlHelper.html#method-i-link_to). Check out the way we wrote this in Sinatra:
 
 ```html
 <ul>
@@ -103,7 +103,7 @@ end
 
 Just like in Sinatra, Rails passes data from requests through `params`.
 
-Refresh and ... the same template error! Let fix that by creating the view for this action.
+Refresh and...the same template error! Let fix that by creating the view for this action.
 
 ```bash
 $ touch app/views/todos/show.html.erb
@@ -117,11 +117,11 @@ Let's update the show view to link back to the index and show both the body and 
 <p><%= @todo.author %></p>
 ```
 
-You'll notice here, we're using the `todos` prefix for the index route in the `link_to`. It's very important we're very exact when we write the path in a `link_to` helper. One 's' can change the route completely.
+You'll notice here, we're using the `todos` prefix for the index route in the `link_to`. It's very important we're very exact when we write the path in a `link_to` helper. One "s" can change the route completely.
 
 Awesome! We now have a fully fledged index and show feature for our application.
 
-## The Show Feature: You do - Tunr
+## The Show Feature: You Do - Tunr
 
 - Create a show feature for each artist.
 - Make sure the show feature links to the index of artists.
@@ -129,4 +129,4 @@ Awesome! We now have a fully fledged index and show feature for our application.
 
 [Solution Here](https://github.com/andrewsunglaekim/tunr_features/tree/index-show-solution)
 
-On to [New Create and Destroy](new_create_destroy.md)
+Next lesson: [New Create and Destroy](new_create_destroy.md)
