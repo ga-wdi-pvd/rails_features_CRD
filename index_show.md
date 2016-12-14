@@ -129,4 +129,18 @@ Awesome! We now have a fully fledged index and show feature for our application.
 
 [Solution Here](https://github.com/andrewsunglaekim/tunr_features/tree/index-show-solution)
 
-Next lesson: [New Create and Destroy](new_create_destroy.md)
+## Review Questions
+- How do you create a Rails application?
+- What command is used to do the following separately to the database: create, edit, update, and seed
+- What is the purpose of Rails generators?
+- Is there a "Rails way" to enter the REPL?
+- Explain the MVC pattern.
+
+## Homework
+[Scribble](https://github.com/ga-wdi-pvd/scribble)
+This will be a multi-night homework. For tonight, do the following sections:
+- Models + Migrations
+- Index Feature
+- Show Feature
+
+Next lesson: [New, Create, and Destroy](new_create_destroy.md)
