@@ -1,24 +1,99 @@
-# Rails Create & Destroy features
+# Rails Part 3: New, Create & Destroy features
 
 Check out the [precursor to this lesson](index_show.md)
 
 ## Learning Objectives
-<!-- - Create a new Rails application with Postgres as the default. -->
-<!-- - Use rake to create, edit, and update, and seed the db. -->
-<!-- - Use Rails generators to create and add attributes to models. -->
-- Use Rails console to inspect and manipulate models.
+- Inspect and manipulate models by using the Rails console
 - Describe the full life cycle of a request/response in Rails
-<!-- - Implement the index feature for a model in Rails -->
-<!-- - Implement the show feature for a model in Rails -->
-- Implement the create feature for a model in Rails
-- Implement the delete feature for a model in Rails
+- Create objects by using RESTful routes and the MVC pattern in Rails
+- Delete objects using RESTful routes in Rails
 
 ## Framing
 One of the most common things that is done on the web is to create new rows in a database. Only users aren't thinking they're creating new rows in a database. They're creating a new status on Facebook, creating a new tweet on the latest news, creating a new sale on craigslist.
 
 In the current version of our Reminder.ly app, we have a solid `index` and `show` feature that allows us to view all our `todos`  as well as each individual `todo`. Now we want to be able to create new `todos`!
 
-### The `new` route: I do - Reminder.ly
+## (C)reate R U D - Building New Objects and Persisting to our DB
+
+Our new feature, as specified by the Boss: "When they submit an order, make sure we know what the heck is going on!"
+
+This translates to the following: "When an incoming HTTP request arrives, our application should create a new object and persist it to our database." 
+
+#### Breaking it Down (10 mins / 0:20)
+
+So, we need to:
+1) receive an HTTP request
+2) create a new object based on data from the request
+3) persist it to our database
+
+We know how to create new objects using Ruby, and we know how to persist objects to the database using ActiveRecord. Let's review what we know first, before we dive into how to do this in rails.
+
+To build a new object, any object, we first need a...(think OO)
+(Class, i.e. blueprint)
+
+```ruby
+class Animal
+  def initialize(name)
+    @name = name
+  end
+  
+  # long-form getter and setter:
+  def age=(age)
+    @age = age
+  end
+  
+  def age
+    @age
+  end
+end
+
+simba = Animal.new("Simba")
+simba.age = 3
+
+```
+How would we persist `simba` to our database?
+
+First, we need to make sure our class is inheriting from ActiveRecord, so our class definition would change:
+```
+class Animal < ActiveRecord::Base
+```
+Next, our `simba` object needs to be saved. We can do that with `save()`
+
+But wait! Now we're doing this through a browser request! A user can initiate the creation of an object within our application, and it can be persisted to our database. Neato!
+
+If we wanted to create a new object via an HTTP request, how might we do that?
+- POST
+- using what kind of html element can POST? A form!
+
+```html
+<form action="/animals" method="POST">
+  <input type="text" name="name">
+  <input type="text" name="age">
+  <button type="submit">
+</form>
+```
+
+Where does this form submission go? Well right now, it goes to "/animals", the action of our form. It is up to us to declare a route to direct this request to the appropriate controller and action, so further processing can happen.
+
+Within our `AnimalsController` (located in the file `animals_controller.rb`), we are going to have an action, `create` that will interface with our model, `animal.rb`. We want the form to submit to this `create` action.
+
+Where do we set up a rule in our application that says: any POST request that hits `"/animals"` goes to our `AnimalController create` action?
+
+...our routes file, `config/routes.rb`!
+
+How do we *declare* a POST route with controller of `animal` and a certain action, let's say `create`?
+
+`post '/animals' => 'animals#create'`
+
+Let's say that in our controller action, we are able to call `save` on our new animal. The animal is created, and automatically given an id of 100. How do we route to our show action?
+
+`get '/animals/100' => 'animals#show'`
+
+What controller and action will a request sent to `animals/100` hit?
+
+
+
+### The `new` route in Reminder.ly (I do / 10 mins / (0:30)
 
 In order to give the user ability to create a `todo`, we first need to provide that user with an interface(aka. a form). For now, we'll put this form on a separate page. Let's update the resources so that the router can make sense of requests to `new` route.
 
@@ -32,7 +107,7 @@ Let's also add a link in the `index` feature to link to the page that will creat
 <h2><%= link_to "New Todo", new_todo_path %></h2>
 ```
 
-Let's click on the link? This unknown action error again... We know what do with you. In `app/controllers/todos_controller.rb`:
+Let's click on the link? This unknown action error again... We know what to do with you! In `app/controllers/todos_controller.rb`:
 
 ```ruby
 def new
@@ -71,13 +146,18 @@ Checkout [rails docs on forms](http://guides.rubyonrails.org/form_helpers.html) 
 
 `form_for` is a helper in rails that allows us to build forms for models. The `f` in pipes is a FormBuilder object that incorporates the knowledge about the model(`@todo` in this case). Methods defined on the FormBuilder are used to generate fields bound to this model.
 
+
 Let's inspect the form using our dev tools and we'll see all the same elements that we see in the Sinatra version of this form. Also note that the input `name` attributes are nested under `todo`
 
-### The `new` route: You do: Tunr
+### Research (5 minutes / 0:50)
+
+What is a `form_tag` in rails, and when would you use `form_tag` instead of `form_for`?
+
+### The `new` route: You do: Tunr (25 minutes / 1:15)
 
 Create a form for users to create new artists at a brand new route.
 
-### Creating: I do - Reminder.ly
+### Creating: I do - Reminder.ly (10 minutes / 1:25)
 
 If we submit the form we'll get the following error:
 
@@ -106,7 +186,7 @@ Now we get this weird error:
 
 Wat?! Why can't we create a `todo` using the hash available in params? This is a security feature of Rails: params could include extra fields that have been maliciously added to the form. This extra data could be harmful, therefore Rails requires us to whitelist fields that are allowed through form submissions.
 
-### Strong Params
+### Strong Params (5 mins / 1:30)
 
 Whitelisting is done using **strong parameters** configuration.
 
@@ -139,13 +219,13 @@ def create
 end
 ```
 
-### Creating: You do - Tunr
+### Creating: You do - Tunr (20 minutes / 1:50)
 
 - Make your form create artists when submitted.
 - be sure to use strong parameters
 - have the create action redirect to the artist you just created
 
-### Deleting: I do - Reminder.ly
+### Deleting: I do - Reminder.ly (5 mins / 1:55)
 
 Another important feature in web apps is the ability to delete rows of data in a database.
 
@@ -183,7 +263,7 @@ end
 
 Awesome, we can now delete any todos we want!
 
-### Deleting: You do - Tunr
+### Deleting: You do - Tunr (20 mins / 2:15)
 
 - Add the ability to delete artists
 
