@@ -1,4 +1,5 @@
-# Rails Index/Show Features
+# Rails Part 2 Index/Show Features
+([View Intro to Rails lesson](https://github.com/ga-wdi-pvd/http-mvc-intro-rails))
 
 ## The Index Feature: I Do - Reminder.ly
 
